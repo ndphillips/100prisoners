@@ -16,13 +16,13 @@
     <loc>/index.html</loc>
   </url>
   <url>
-    <loc>/reference/add_outcomes.agent.html</loc>
+    <loc>/reference/add_game_outcomes.agent.html</loc>
   </url>
   <url>
-    <loc>/reference/add_outcomes.environment.html</loc>
+    <loc>/reference/add_game_outcomes.environment.html</loc>
   </url>
   <url>
-    <loc>/reference/add_outcomes.html</loc>
+    <loc>/reference/add_game_outcomes.html</loc>
   </url>
   <url>
     <loc>/reference/add_game_summaries.html</loc>
@@ -31,10 +31,37 @@
     <loc>/reference/add_loops.html</loc>
   </url>
   <url>
+    <loc>/reference/add_outcomes.html</loc>
+  </url>
+  <url>
+    <loc>/reference/add_rooms.html</loc>
+  </url>
+  <url>
+    <loc>/reference/create_game_summaries.html</loc>
+  </url>
+  <url>
+    <loc>/reference/create_outcomes.html</loc>
+  </url>
+  <url>
+    <loc>/reference/create_outcomes_agent.html</loc>
+  </url>
+  <url>
+    <loc>/reference/create_outcomes_environment.html</loc>
+  </url>
+  <url>
+    <loc>/reference/create_rooms.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
   </url>
   <url>
+    <loc>/reference/plot_boxes_max.html</loc>
+  </url>
+  <url>
     <loc>/reference/plot_prisoner_search.html</loc>
+  </url>
+  <url>
+    <loc>/reference/print.prisoner_game.html</loc>
   </url>
   <url>
     <loc>/reference/prisoners_create_game.html</loc>
@@ -46,9 +73,24 @@
     <loc>/reference/prisoners_simulate.html</loc>
   </url>
   <url>
+    <loc>/reference/pull_duration_mean.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pull_duration_total.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pull_outcomes.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pull_rooms.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pull_success_p.html</loc>
+  </url>
+  <url>
     <loc>/reference/simulate_agent_prisoner.html</loc>
   </url>
   <url>
-    <loc>/reference/room_to_outcomes_agent.html</loc>
+    <loc>/reference/simulate_agent_team.html</loc>
   </url>
 </urlset>
