@@ -11,7 +11,9 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 status](https://www.r-pkg.org/badges/version/prisoners)](https://CRAN.R-project.org/package=prisoners)
 <!-- badges: end -->
 
-The goal of prisoners is to …
+The goal of prisoners is to provide functinoality to simulate the 100
+prisoners problem
+(<https://en.wikipedia.org/wiki/100_prisoners_problem>)
 
 ## Installation
 
