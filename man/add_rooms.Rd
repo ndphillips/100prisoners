@@ -4,7 +4,7 @@
 \alias{add_rooms}
 \title{Title}
 \usage{
-add_rooms(game)
+add_rooms(game, rooms = NULL)
 }
 \arguments{
 \item{prisoner_game}{}

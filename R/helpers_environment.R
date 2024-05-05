@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-add_loops <- function(room) {
+add_loops_to_room <- function(room) {
   room <- room |>
     dplyr::mutate(
       loop = c(1, rep(NA_integer_, nrow(room) - 1)),

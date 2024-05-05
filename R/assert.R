@@ -13,3 +13,7 @@ assert_has_outcomes <- function(game) {
 
   assertthat::assert_that(!is.null(game$outcomes))
 }
+
+assert_is_room <- function(room) {
+  assertthat::assert_that(inherits(room, "room"))
+}

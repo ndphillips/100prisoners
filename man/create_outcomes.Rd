@@ -4,12 +4,12 @@
 \alias{create_outcomes}
 \title{Create game outcomes based on a method}
 \usage{
-create_outcomes(rooms_ls, pick_max, prisoners_n, method)
+create_outcomes(rooms, open_max, prisoners_n, method)
 }
 \arguments{
-\item{rooms_ls}{list. A list of rooms created by \code{create_rooms}}
+\item{rooms}{list. A list of rooms created by \code{create_rooms}}
 
-\item{pick_max}{integer. The maximum number of boxes that can be opened}
+\item{open_max}{integer. The maximum number of boxes that can be opened}
 
 \item{method}{character. The method to use. Can be 'environment' or 'agent'}
 }

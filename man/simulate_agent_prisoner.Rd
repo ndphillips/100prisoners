@@ -4,17 +4,23 @@
 \alias{simulate_agent_prisoner}
 \title{Title}
 \usage{
-simulate_agent_prisoner(room = NULL, prisoner_i = 1, pick_max = NULL)
+simulate_agent_prisoner(room = NULL, prisoner_i = 1, open_max = NULL)
 }
 \arguments{
 \item{room}{tbl. A tibble created by prisoners_create_room()}
 
 \item{prisoner_i}{integer. The prisoner number}
 
-\item{pick_max}{integer. The maximum number of boxes to search}
+\item{open_max}{integer. The maximum number of boxes to search}
 }
 \value{
-list
+list. A list with the following elements:
+\itemize{
+\item prisoner: integer. The prisoner number
+\item is_success: logical. Whether the prisoner was successful
+\item ticket_v: integer. The ticket numbers in the order they were opened
+\item boxes_opened_n: integer. The number of boxes opened by the prisoner
+}
 }
 \description{
 Title

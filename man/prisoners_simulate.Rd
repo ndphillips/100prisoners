@@ -5,9 +5,10 @@
 \title{Simulate the prisoner game}
 \usage{
 prisoners_simulate(
+  rooms = NULL,
   prisoners_n = 100,
   teams_n = 100,
-  pick_max = floor(prisoners_n/2),
+  open_max = floor(prisoners_n/2),
   method = c("environment", "agent")
 )
 }
@@ -16,7 +17,7 @@ prisoners_simulate(
 
 \item{teams_n}{integer. The number of (separate) teams of prisoners}
 
-\item{pick_max}{integer. The maximum number of boxes individual prisoners can open}
+\item{open_max}{integer. The maximum number of boxes individual prisoners can open}
 
 \item{method}{character. The method to use for simulation. Either "agent" or "environment"}
 }

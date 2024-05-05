@@ -4,14 +4,14 @@
 \alias{create_outcomes_environment}
 \title{Add game outcomes using the environment method}
 \usage{
-create_outcomes_environment(rooms_ls, prisoners_n, pick_max)
+create_outcomes_environment(rooms, prisoners_n, open_max)
 }
 \arguments{
-\item{rooms_ls}{list. A list of rooms created by \code{create_rooms}}
+\item{rooms}{list. A list of rooms created by \code{create_rooms}}
 
 \item{prisoners_n}{integer. The number of prisoners}
 
-\item{pick_max}{integer. The maximum number of boxes that can be opened}
+\item{open_max}{integer. The maximum number of boxes that can be opened}
 }
 \description{
 Add game outcomes using the environment method

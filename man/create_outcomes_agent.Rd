@@ -4,7 +4,7 @@
 \alias{create_outcomes_agent}
 \title{Add game outcomes using the agent method}
 \usage{
-create_outcomes_agent(rooms_ls, prisoners_n, pick_max)
+create_outcomes_agent(rooms, prisoners_n, open_max)
 }
 \arguments{
 \item{prisoner_game}{prisoner_game. A game created by \verb{create prisoner_game}}

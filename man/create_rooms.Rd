@@ -4,12 +4,12 @@
 \alias{create_rooms}
 \title{Title}
 \usage{
-create_rooms(boxes_n = 100, rooms_n = 1)
+create_rooms(prisoners_n = 100, rooms_n = 10)
 }
 \arguments{
-\item{boxes_n}{integer. The number of boxes in the room}
-
 \item{rooms_n}{integer. The number of rooms}
+
+\item{boxes_n}{integer. The number of boxes in the room}
 }
 \description{
 Title

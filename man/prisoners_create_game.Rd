@@ -4,14 +4,14 @@
 \alias{prisoners_create_game}
 \title{Create a new prisoner game object}
 \usage{
-prisoners_create_game(teams_n, prisoners_n, pick_max, method = "environment")
+prisoners_create_game(teams_n, prisoners_n, open_max, method = "environment")
 }
 \arguments{
 \item{teams_n}{integer. The number of teams of prisoners}
 
 \item{prisoners_n}{integer. The number of prisoners per team}
 
-\item{pick_max}{integer. The maximum number of boxes individual prisoners can open}
+\item{open_max}{integer. The maximum number of boxes individual prisoners can open}
 
 \item{method}{character. The method to use for simulation. Either "agent" or "environment"}
 }

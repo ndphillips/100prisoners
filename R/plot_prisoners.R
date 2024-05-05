@@ -12,7 +12,7 @@ plot_prisoner_search <- function(room,
                                  prisoner,
                                  arrange_loops = TRUE) {
   # room <- prisoners_create_room(16) |>
-  #   add_loops()
+  #   add_loops_to_room()
 
   if (arrange_loops) {
     room <- room |>

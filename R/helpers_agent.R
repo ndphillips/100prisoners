@@ -2,17 +2,20 @@
 #'
 #' @param room tbl. A tibble created by prisoners_create_room()
 #' @param prisoner_i integer. The prisoner number
-#' @param pick_max integer. The maximum number of boxes to search
+#' @param open_max integer. The maximum number of boxes to search
 #'
-#' @return  list
+#' @return  list. A list with the following elements:
+#' - prisoner: integer. The prisoner number
+#' - is_success: logical. Whether the prisoner was successful
+#' - ticket_v: integer. The ticket numbers in the order they were opened
+#' - boxes_opened_n: integer. The number of boxes opened by the prisoner
 #'
-#' @export
 #'
-#' @examples
 simulate_agent_prisoner <- function(room = NULL,
                                     prisoner_i = 1,
-                                    pick_max = NULL) {
-  pick_i <- 1
+                                    open_max = NULL) {
+  open_i <- 1
+
   ticket_v <- room |>
     dplyr::filter(box == prisoner_i) |>
     dplyr::pull(ticket)
@@ -24,10 +27,10 @@ simulate_agent_prisoner <- function(room = NULL,
   }
 
   while (length(ticket_v) <= nrow(room) && is_success_i == FALSE) {
-    pick_i <- pick_i + 1
+    open_i <- open_i + 1
 
     ticket_i <- room |>
-      dplyr::filter(box == ticket_v[pick_i - 1]) |>
+      dplyr::filter(box == ticket_v[open_i - 1]) |>
       dplyr::pull(ticket)
 
     ticket_v <- c(ticket_v, ticket_i)
@@ -37,7 +40,7 @@ simulate_agent_prisoner <- function(room = NULL,
     }
   }
 
-  is_success_i <- length(ticket_v) <= pick_max
+  is_success_i <- length(ticket_v) <= open_max
 
   out <- list(
     prisoner = prisoner_i,

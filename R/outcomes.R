@@ -10,10 +10,10 @@ add_outcomes <- function(game) {
   sim_time_start <- Sys.time()
 
   outcomes <- create_outcomes(
-    rooms_ls = game |> pull_rooms(),
-    prisoners_n = game |> util_get_param("prisoners_n"),
-    pick_max = game |> util_get_param("pick_max"),
-    method = game |> util_get_param("method")
+    rooms = game |> pull_rooms(),
+    prisoners_n = game |> pull_param("prisoners_n"),
+    open_max = game |> pull_param("open_max"),
+    method = game |> pull_param("method")
   )
 
   game$outcomes <- outcomes
@@ -21,7 +21,7 @@ add_outcomes <- function(game) {
   sim_time_end <- Sys.time()
 
   sim_duration_total <- as.numeric(difftime(sim_time_end, sim_time_start, units = "secs"))
-  sim_duration_mean <- sim_duration_total / (game |> util_get_param("teams_n"))
+  sim_duration_mean <- sim_duration_total / (game |> pull_param("teams_n"))
 
   game$meta$sim_duration_total <- sim_duration_total
   game$meta$sim_duration_mean <- sim_duration_mean
@@ -31,21 +31,21 @@ add_outcomes <- function(game) {
 
 #' Create game outcomes based on a method
 #'
-#' @param rooms_ls list. A list of rooms created by `create_rooms`
-#' @param pick_max integer. The maximum number of boxes that can be opened
+#' @param rooms list. A list of rooms created by `create_rooms`
+#' @param open_max integer. The maximum number of boxes that can be opened
 #' @param method character. The method to use. Can be 'environment' or 'agent'
 #'
 #' @return
 #' @export
 #'
 #' @examples
-create_outcomes <- function(rooms_ls,
-                            pick_max,
+create_outcomes <- function(rooms,
+                            open_max,
                             prisoners_n,
                             method) {
   out <- switch(method,
-    "environment" = create_outcomes_environment(rooms_ls = rooms_ls, pick_max = pick_max, prisoners_n = prisoners_n),
-    "agent" = create_outcomes_agent(rooms_ls = rooms_ls, pick_max = pick_max, prisoners_n = prisoners_n)
+    "environment" = create_outcomes_environment(rooms = rooms, open_max = open_max, prisoners_n = prisoners_n),
+    "agent" = create_outcomes_agent(rooms = rooms, open_max = open_max, prisoners_n = prisoners_n)
   )
 
   out
@@ -54,33 +54,33 @@ create_outcomes <- function(rooms_ls,
 
 #' Add game outcomes using the environment method
 #'
-#' @param rooms_ls list. A list of rooms created by `create_rooms`
+#' @param rooms list. A list of rooms created by `create_rooms`
 #' @param prisoners_n integer. The number of prisoners
-#' @param pick_max integer. The maximum number of boxes that can be opened
+#' @param open_max integer. The maximum number of boxes that can be opened
 #'
 #' @return
 #' @export
 #'
 #' @examples
-create_outcomes_environment <- function(rooms_ls,
+create_outcomes_environment <- function(rooms,
                                         prisoners_n,
-                                        pick_max) {
-  teams_n <- length(rooms_ls)
+                                        open_max) {
+  teams_n <- length(rooms)
 
-  cli::cli_progress_bar(glue::glue("Simulating {teams_n} teams of {prisoners_n} prisoners"), total = teams_n)
+  cli::cli_progress_bar(glue::glue("Simulating {prisoners_n} prisoners across {teams_n} rooms"), total = teams_n)
 
   for (team_i in 1:teams_n) {
-    rooms_ls[[team_i]] <- rooms_ls[[team_i]] |>
-      add_loops()
+    rooms[[team_i]] <- rooms[[team_i]] |>
+      add_loops_to_room()
 
     cli::cli_progress_update()
   }
 
-  outcomes_tbl <- rooms_ls |>
+  outcomes_tbl <- rooms |>
     purrr::map(
       \(x) {
         tibble::tibble(
-          is_success = max(x$index_in_loop) <= pick_max,
+          is_success = max(x$index_in_loop) <= open_max,
           boxes_opened_n_max = max(x$index_in_loop)
         )
       }
@@ -98,19 +98,19 @@ create_outcomes_environment <- function(rooms_ls,
 #' @export
 #'
 #' @examples
-create_outcomes_agent <- function(rooms_ls,
+create_outcomes_agent <- function(rooms,
                                   prisoners_n,
-                                  pick_max) {
-  teams_n <- length(rooms_ls)
+                                  open_max) {
+  teams_n <- length(rooms)
 
-  cli::cli_progress_bar(glue::glue("Simulating {teams_n} teams of {prisoners_n} prisoners"), total = teams_n)
+  cli::cli_progress_bar(glue::glue("Simulating {prisoners_n} prisoners across {teams_n} rooms"), total = teams_n)
 
-  outcomes_ls <- lapply(1:length(rooms_ls), function(x) {
+  outcomes_ls <- lapply(1:length(rooms), function(x) {
     list()
   })
 
   for (team_i in 1:teams_n) {
-    room_i <- rooms_ls[[team_i]]
+    room_i <- rooms[[team_i]]
 
     prisoners_n <- nrow(room_i)
 
@@ -120,7 +120,7 @@ create_outcomes_agent <- function(rooms_ls,
         simulate_agent_prisoner(
           room = room_i,
           prisoner_i = prisoner_i,
-          pick_max = pick_max
+          open_max = open_max
         )
       }
     )
@@ -144,7 +144,7 @@ create_outcomes_agent <- function(rooms_ls,
         )
       }
     ) |>
-    dplyr::mutate(is_success = boxes_opened_n_max <= pick_max) |>
+    dplyr::mutate(is_success = boxes_opened_n_max <= open_max) |>
     dplyr::select(is_success, boxes_opened_n_max)
 
   return(outcomes_tbl)

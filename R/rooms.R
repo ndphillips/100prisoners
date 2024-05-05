@@ -7,20 +7,22 @@
 #' @export
 #'
 #' @examples
-create_rooms <- function(boxes_n = 100,
-                         rooms_n = 1) {
-  rooms_ls <- lapply(1:rooms_n, \(x) {
-    tickets_v <- sample(1:boxes_n,
-      size = boxes_n
+create_rooms <- function(prisoners_n = 100,
+                         rooms_n = 10) {
+  rooms <- lapply(1:rooms_n, \(x) {
+    tickets_v <- sample(1:prisoners_n,
+      size = prisoners_n
     )
 
-    tibble::tibble(
-      box = 1:boxes_n,
-      ticket = tickets_v
-    )
+    room <- tibble::tibble(
+      box = 1:prisoners_n,
+      ticket = tickets_v)
+
+    room
   })
 
-  rooms_ls
+  out <- structure(rooms, class = "list_of_rooms")
+  out
 }
 
 #' Title
@@ -31,16 +33,18 @@ create_rooms <- function(boxes_n = 100,
 #' @export
 #'
 #' @examples
-add_rooms <- function(game) {
-  teams_n <- util_get_param(game, "teams_n")
-  prisoners_n <- util_get_param(game, "prisoners_n")
+add_rooms <- function(game, rooms = NULL) {
+  teams_n <- pull_param(game, "teams_n")
+  prisoners_n <- pull_param(game, "prisoners_n")
 
-  rooms_ls <- create_rooms(
-    boxes_n = prisoners_n,
-    rooms_n = teams_n
-  )
+  if (is.null(rooms)) {
+    rooms <- create_rooms(
+      prisoners_n = prisoners_n,
+      rooms_n = teams_n
+    )
+  }
 
-  game$rooms <- rooms_ls
+  game$rooms <- rooms
 
   return(game)
 }
