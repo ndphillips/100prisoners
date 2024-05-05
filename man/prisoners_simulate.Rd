@@ -6,7 +6,7 @@
 \usage{
 prisoners_simulate(
   prisoners_n = 100,
-  teams_n = 10,
+  teams_n = 100,
   pick_max = floor(prisoners_n/2),
   method = c("environment", "agent")
 )

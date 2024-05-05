@@ -12,7 +12,7 @@
 #'
 #' @examples
 prisoners_simulate <- function(prisoners_n = 100,
-                               teams_n = 10,
+                               teams_n = 100,
                                pick_max = floor(prisoners_n / 2),
                                method = c("environment", "agent")) {
   method <- match.arg(method)
@@ -24,7 +24,9 @@ prisoners_simulate <- function(prisoners_n = 100,
     method = method
   )
 
-  game <- add_game_outcomes(game)
+  game <- add_rooms(game)
+
+  game <- add_outcomes(game)
 
   game <- add_game_summaries(game)
 

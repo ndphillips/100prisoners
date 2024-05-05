@@ -9,12 +9,6 @@
 #' @return list. A list with the structure of the game
 #'
 prisoners_create_game <- function(teams_n, prisoners_n, pick_max, method = "environment") {
-  pb <- progress::progress_bar$new(
-    format = "Team :current/:total [:bar] :percent eta: :eta",
-    total = teams_n,
-    clear = FALSE
-  )
-
   params <- list(
     method = method,
     pick_max = pick_max,
@@ -23,11 +17,11 @@ prisoners_create_game <- function(teams_n, prisoners_n, pick_max, method = "envi
   )
 
   out <- structure(list(
-    pb = pb,
     params = params,
+    rooms = NULL,
     outcomes = NULL,
     summaries = NULL,
-    processing = NULL
+    meta = NULL
   ), class = c(method, "prisoner_game"))
 
   return(out)
